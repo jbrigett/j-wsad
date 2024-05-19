@@ -1,0 +1,6 @@
+rootProject.name = 'wsad'
+include 'wsad-targeting-handler'
+include 'wsad-data-model'
+include 'wsad-api'
+include 'wsad-db'
+

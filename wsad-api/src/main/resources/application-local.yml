@@ -1,0 +1,51 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 110MB
+      max-request-size: 110MB
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/wsad-db
+    username: wsaddb
+    password: wsaddb
+  jpa:
+    show-sql: true
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL94Dialect
+  test.database.replace: NONE
+  liquibase:
+    contexts: local
+  task.execution.pool.core-size: 1
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    org.apache.kafka.clients.NetworkClient: ERROR
+    org.springframework.web.client.RestTemplate: DEBUG
+
+# scheduler
+scheduler:
+  jobs:
+    find-terminated-sessions:
+      enabled: true
+      cron: "0 0 1 * * *"
+      shedlock:
+        at-most: PT5M
+        at-least: PT1M
+    find-inactive-sessions:
+      enabled: true
+      cron: "0 1 * * * *"
+      shedlock:
+        at-most: PT5M
+        at-least: PT1M
+    clear-old-sessions:
+      enabled: true
+      cron: "0 0 0 0 1 *"
+      shedlock:
+        at-most: PT5M
+        at-least: PT1M
+
+# iDBSCAN
+idbscan:
+  settings:
+    eps: 0.5
+    min-points: 2

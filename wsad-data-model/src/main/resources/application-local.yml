@@ -1,0 +1,7 @@
+# iDBSCAN
+idbscan:
+  centroids:
+    a-metric: 0.5
+    b-metric: 0.5
+    c-metric: 0.5
+    k-metric: 0.5
